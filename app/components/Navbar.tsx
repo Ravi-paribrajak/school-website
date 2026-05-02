@@ -87,7 +87,7 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+              className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[998] md:hidden"
               onClick={() => setIsOpen(false)}
             />
 
@@ -97,11 +97,11 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", bounce: 0, duration: 0.4 }}
-              className="fixed top-0 right-0 h-screen w-[85%] max-w-sm bg-white shadow-2xl z-50 flex flex-col px-6 py-8 md:hidden"
+              className="fixed inset-y-0 right-0 w-[85%] max-w-sm bg-white shadow-2xl z-[999] flex flex-col md:hidden"
             >
-              {/* Top Bar inside Drawer */}
-              <div className="flex justify-between items-center mb-10">
-                <span className="font-serif text-xl font-bold text-slate-900">Institute OS</span>
+              {/* Drawer Header */}
+              <div className="flex justify-between items-center p-6 border-b border-slate-100">
+                <span className="font-serif text-2xl font-bold text-slate-900">Institute OS</span>
                 <button
                   onClick={() => setIsOpen(false)}
                   className="p-2 -mr-2 text-slate-900 hover:bg-slate-100 rounded-full transition-colors"
@@ -110,37 +110,37 @@ export default function Navbar() {
                 </button>
               </div>
 
-              {/* Navigation Links */}
-              <div className="flex flex-col space-y-2">
+              {/* Drawer Links (Middle) */}
+              <div className="flex-1 flex flex-col p-6 space-y-6 overflow-y-auto">
                 {navLinks.map((link) => (
                   <Link
                     key={link.name}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="text-xl font-medium text-slate-900 border-b border-slate-100 py-4 hover:text-blue-600 transition-colors"
+                    className="text-lg font-medium text-slate-700 hover:text-blue-600 transition-colors"
                   >
                     {link.name}
                   </Link>
                 ))}
               </div>
 
-              {/* Bottom Actions */}
-              <div className="mt-auto flex flex-col gap-6">
+              {/* Drawer Footer (Bottom) */}
+              <div className="mt-auto p-6 border-t border-slate-100 flex flex-col space-y-4 bg-slate-50 pb-8">
                 <a 
                   href="https://youtube.com/@letslearnwithaloksir2528?si=D2DSm9E9CD8WIMPE" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="flex items-center gap-4 text-xl font-medium text-slate-900 hover:text-red-600 transition-colors group"
+                  className="flex items-center gap-4 text-lg font-semibold text-slate-900 hover:text-red-600 transition-colors group"
                 >
-                  <div className="p-3 rounded-xl bg-red-50 group-hover:bg-red-100 transition-colors">
-                    <FaYoutube className="w-8 h-8 text-red-600"/>
+                  <div className="p-3 rounded-xl bg-red-100 group-hover:bg-red-200 transition-colors">
+                    <FaYoutube className="w-6 h-6 text-red-600"/>
                   </div>
                   <span>Watch Lectures</span>
                 </a>
                 <Link
                   href="#register"
                   onClick={() => setIsOpen(false)}
-                  className="inline-flex h-14 items-center justify-center rounded-2xl bg-slate-900 text-white text-xl font-bold hover:bg-slate-800 transition-all active:scale-[0.98] shadow-xl shadow-slate-200"
+                  className="inline-flex w-full h-14 items-center justify-center rounded-2xl bg-slate-900 text-white text-lg font-bold hover:bg-slate-800 transition-all active:scale-[0.98] shadow-xl shadow-slate-200"
                 >
                   Apply Now
                 </Link>

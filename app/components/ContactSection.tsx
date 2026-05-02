@@ -122,7 +122,7 @@ export default function ContactSection() {
       </section>
 
       {/* Floating WhatsApp CTA */}
-      <div className="fixed bottom-8 right-8 z-50 flex items-center justify-center">
+      <div className="fixed bottom-8 right-8 z-40 flex items-center justify-center">
         <div className="absolute w-14 h-14 bg-green-500 rounded-full animate-ping opacity-75"></div>
         <a
           href="https://wa.me/919876543210"

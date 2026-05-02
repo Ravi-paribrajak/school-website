@@ -60,3 +60,14 @@
 - Implemented a darkened backdrop overlay with blur effects.
 - Added spring-animated transitions for the drawer and vertical layout for links.
 - Styled YouTube and "Apply Now" buttons as high-fidelity primary actions at the drawer's base.
+
+### [2026-05-01] - Mobile Drawer Structural Rewrite
+- Fixed visual overlap issues by increasing z-indices (z-[90] for overlay, z-[100] for drawer).
+- Restructured drawer into fixed Header, scrollable Middle, and pinned Footer sections.
+- Optimized footer with `bg-slate-50` and extra bottom padding for mobile gesture bars.
+
+### [2026-05-01] - Layout & Z-Index Locks
+- Locked mobile drawer height using `inset-y-0` to prevent vertical collapse on scroll.
+- Escalated z-indices for menu overlay (`z-[998]`) and drawer (`z-[999]`).
+- Re-calibrated floating WhatsApp button to `z-40` to ensure it hides behind the menu overlay.
+- Added `flex-1` to middle drawer container to strictly pin footer actions to the base.
