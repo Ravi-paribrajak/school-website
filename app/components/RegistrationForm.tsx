@@ -14,7 +14,7 @@ const formSchema = z.object({
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
   phone: z.string().regex(/^\d{10}$/, "Phone number must be exactly 10 digits"),
-  course: z.enum(courses, {
+  course: z.enum(courses).refine((value) => value, {
     message: "Please select a valid course",
   }),
 });

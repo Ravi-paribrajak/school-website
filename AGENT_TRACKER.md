@@ -35,3 +35,17 @@
 ### [2026-05-01] - Mobile Responsive Audit
 - Audited and updated `Hero.tsx`, `StatsBanner.tsx`, `Gallery.tsx`, and `ContactSection.tsx` for mobile-first responsiveness.
 - Optimized typography and grid layouts across key components.
+
+### [2026-05-01] - YouTube Channel Integration
+- Integrated YouTube channel links into the `Navbar.tsx` (desktop and mobile).
+- Added a dedicated YouTube lecture block to `ContactSection.tsx`.
+
+### [2026-05-01] - Testimonials Marquee
+- Created `Testimonials.tsx` with an infinite scrolling marquee animation.
+- Implemented premium card styling and realistic Indian student/parent testimonials.
+- Integrated the component into the main landing page.
+
+### [2026-05-01] - StatsBanner Premium Upgrade
+- Implemented `AnimatedCounter` with `framer-motion` for dynamic count-up effects.
+- Redesigned background with deep slate gradients and ambient glow effects.
+- Applied vibrant text gradients and refined uppercase tracking for a "Level 100" aesthetic.

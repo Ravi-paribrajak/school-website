@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { FaYoutube } from "react-icons/fa";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -48,6 +49,14 @@ export default function Navbar() {
                 <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-blue-500 origin-center scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
               </Link>
             ))}
+            <a 
+              href="https://youtube.com/@letslearnwithaloksir2528?si=D2DSm9E9CD8WIMPE" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className={`transition-colors outline-none ${scrolled ? 'text-slate-600 hover:text-red-500' : 'text-slate-300 hover:text-red-500'}`}
+            >
+              <FaYoutube className="w-6 h-6"/>
+            </a>
             <Link
               href="#register"
               className={`inline-flex h-10 items-center justify-center rounded-full px-6 text-sm font-medium transition-all hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 ${scrolled ? 'bg-slate-900 text-white hover:bg-slate-800 focus:ring-slate-900' : 'bg-white text-slate-900 hover:bg-slate-100 focus:ring-white focus:ring-offset-slate-900'}`}
@@ -89,13 +98,23 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <Link
-              href="#register"
-              onClick={() => setIsOpen(false)}
-              className="inline-flex w-full h-12 mt-4 items-center justify-center rounded-xl bg-slate-900 text-white text-lg font-semibold hover:bg-slate-800 transition-colors shadow-md"
-            >
-              Apply Now
-            </Link>
+            <div className="flex items-center gap-4 pt-4 border-t border-slate-100">
+              <a 
+                href="https://youtube.com/@letslearnwithaloksir2528?si=D2DSm9E9CD8WIMPE" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-slate-400 hover:text-red-500 transition-colors"
+              >
+                <FaYoutube className="w-8 h-8"/>
+              </a>
+              <Link
+                href="#register"
+                onClick={() => setIsOpen(false)}
+                className="flex-1 inline-flex h-12 items-center justify-center rounded-xl bg-slate-900 text-white text-lg font-semibold hover:bg-slate-800 transition-colors shadow-md"
+              >
+                Apply Now
+              </Link>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
