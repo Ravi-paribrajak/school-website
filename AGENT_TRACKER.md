@@ -49,3 +49,14 @@
 - Implemented `AnimatedCounter` with `framer-motion` for dynamic count-up effects.
 - Redesigned background with deep slate gradients and ambient glow effects.
 - Applied vibrant text gradients and refined uppercase tracking for a "Level 100" aesthetic.
+
+### [2026-05-01] - Bulletproof Animated Counters
+- Fixed counter glitching by using direct `animate` function from `framer-motion`.
+- Implemented strict `Math.round` logic and precise target value locking.
+- Added 0{suffix} fallback for initial render to prevent layout shift and blank states.
+
+### [2026-05-01] - Premium Side Drawer Mobile Menu
+- Replaced basic dropdown with a slide-in side drawer for a native-app experience.
+- Implemented a darkened backdrop overlay with blur effects.
+- Added spring-animated transitions for the drawer and vertical layout for links.
+- Styled YouTube and "Apply Now" buttons as high-fidelity primary actions at the drawer's base.

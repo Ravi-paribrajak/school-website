@@ -4,8 +4,7 @@ import { useEffect, useRef } from "react";
 import { 
   motion, 
   useInView, 
-  useMotionValue, 
-  useSpring 
+  animate
 } from "framer-motion";
 
 const stats = [
@@ -19,38 +18,28 @@ function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   
-  const motionValue = useMotionValue(0);
-  const springValue = useSpring(motionValue, {
-    damping: 30,
-    stiffness: 100,
-  });
-
   useEffect(() => {
     if (inView) {
-      motionValue.set(value);
+      const controls = animate(0, value, {
+        duration: 2.5,
+        ease: "easeOut",
+        onUpdate: (latest) => {
+          if (ref.current) {
+            ref.current.textContent = Math.round(latest) + suffix;
+          }
+        },
+      });
+      return () => controls.stop();
     }
-  }, [inView, value, motionValue]);
-
-  useEffect(() => {
-    return springValue.on("change", (latest) => {
-      if (ref.current) {
-        ref.current.textContent = Math.floor(latest).toString();
-      }
-    });
-  }, [springValue]);
+  }, [inView, value, suffix]);
 
   return (
-    <div className="flex items-baseline">
-      <span
-        ref={ref}
-        className="text-4xl md:text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-300 drop-shadow-sm"
-      >
-        0
-      </span>
-      <span className="text-3xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-300 drop-shadow-sm">
-        {suffix}
-      </span>
-    </div>
+    <span
+      ref={ref}
+      className="text-4xl md:text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-300 drop-shadow-sm"
+    >
+      0{suffix}
+    </span>
   );
 }
 

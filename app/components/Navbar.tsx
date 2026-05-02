@@ -78,44 +78,75 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu Side Drawer */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="absolute top-full left-0 w-full bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-xl flex flex-col p-6 space-y-4 md:hidden"
-          >
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="text-lg font-medium text-slate-900 hover:text-blue-600 transition-colors"
-              >
-                {link.name}
-              </Link>
-            ))}
-            <div className="flex items-center gap-4 pt-4 border-t border-slate-100">
-              <a 
-                href="https://youtube.com/@letslearnwithaloksir2528?si=D2DSm9E9CD8WIMPE" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="text-slate-400 hover:text-red-500 transition-colors"
-              >
-                <FaYoutube className="w-8 h-8"/>
-              </a>
-              <Link
-                href="#register"
-                onClick={() => setIsOpen(false)}
-                className="flex-1 inline-flex h-12 items-center justify-center rounded-xl bg-slate-900 text-white text-lg font-semibold hover:bg-slate-800 transition-colors shadow-md"
-              >
-                Apply Now
-              </Link>
-            </div>
-          </motion.div>
+          <>
+            {/* Dark Backdrop Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+              onClick={() => setIsOpen(false)}
+            />
+
+            {/* Slide-in Drawer */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+              className="fixed top-0 right-0 h-screen w-[85%] max-w-sm bg-white shadow-2xl z-50 flex flex-col px-6 py-8 md:hidden"
+            >
+              {/* Top Bar inside Drawer */}
+              <div className="flex justify-between items-center mb-10">
+                <span className="font-serif text-xl font-bold text-slate-900">Institute OS</span>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="p-2 -mr-2 text-slate-900 hover:bg-slate-100 rounded-full transition-colors"
+                >
+                  <X className="h-7 w-7" />
+                </button>
+              </div>
+
+              {/* Navigation Links */}
+              <div className="flex flex-col space-y-2">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="text-xl font-medium text-slate-900 border-b border-slate-100 py-4 hover:text-blue-600 transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+
+              {/* Bottom Actions */}
+              <div className="mt-auto flex flex-col gap-6">
+                <a 
+                  href="https://youtube.com/@letslearnwithaloksir2528?si=D2DSm9E9CD8WIMPE" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center gap-4 text-xl font-medium text-slate-900 hover:text-red-600 transition-colors group"
+                >
+                  <div className="p-3 rounded-xl bg-red-50 group-hover:bg-red-100 transition-colors">
+                    <FaYoutube className="w-8 h-8 text-red-600"/>
+                  </div>
+                  <span>Watch Lectures</span>
+                </a>
+                <Link
+                  href="#register"
+                  onClick={() => setIsOpen(false)}
+                  className="inline-flex h-14 items-center justify-center rounded-2xl bg-slate-900 text-white text-xl font-bold hover:bg-slate-800 transition-all active:scale-[0.98] shadow-xl shadow-slate-200"
+                >
+                  Apply Now
+                </Link>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </nav>
