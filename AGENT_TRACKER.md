@@ -24,6 +24,11 @@
 
 ## Changelog
 
+### [2026-05-01] - Native Mobile Gestures
+- Implemented Swipe-to-Dismiss using Framer Motion drag gestures (drag constraints and offset detection).
+- Added Scroll-to-Dismiss logic that automatically closes the drawer when the user scrolls the page.
+- Enhanced the mobile UX to align with native app interaction patterns.
+
 ### [2026-05-01] - Pivot to UI Demo
 - Updated `PROJECT_ROADMAP.md` to focus on high-fidelity UI/UX without backend dependencies.
 - Overwrote `AGENT_TRACKER.md` with granular tasks for Phase 2 (Masonry Gallery & 3D Faculty Cards).
@@ -71,3 +76,19 @@
 - Escalated z-indices for menu overlay (`z-[998]`) and drawer (`z-[999]`).
 - Re-calibrated floating WhatsApp button to `z-40` to ensure it hides behind the menu overlay.
 - Added `flex-1` to middle drawer container to strictly pin footer actions to the base.
+
+### [2026-05-01] - Native Mobile Gestures
+- Implemented Swipe-to-Dismiss using Framer Motion drag gestures (drag constraints and offset detection).
+- Added Scroll-to-Dismiss logic that automatically closes the drawer when the user scrolls the page.
+- Enhanced the mobile UX to align with native app interaction patterns.
+
+### [2026-05-01] - Mobile UX: Snap-Scroll Carousels
+- Converted Faculty and Gallery vertical grids into horizontal snap-scroll carousels on mobile.
+- Implemented `snap-x snap-mandatory` and `min-w-[85vw]` for a native-app swipe experience.
+- Hidden browser scrollbars while maintaining functionality using custom CSS utility classes.
+- Standardized Gallery card heights for consistent horizontal alignment.
+
+### [2026-05-01] - Gallery Aspect Ratio Standardization
+- Locked mobile gallery items to a strict `aspect-[4/3]` to prevent jagged scrolling.
+- Applied `absolute inset-0` and `object-cover` to images for perfect container filling.
+- Optimized card width units (`w-[85vw]`) to ensure consistent horizontal snapping.

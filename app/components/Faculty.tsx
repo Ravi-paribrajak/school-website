@@ -98,13 +98,13 @@ export default function Faculty() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-50px" }}
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto px-4"
+        className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-x-auto snap-x snap-mandatory pb-8 scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden max-w-7xl mx-auto px-4"
       >
         {facultyMembers.map((faculty) => (
           <motion.div
             key={faculty.id}
             variants={cardVariants}
-            className="relative group overflow-hidden rounded-2xl h-[400px] shadow-lg bg-slate-200 cursor-pointer"
+            className="relative group overflow-hidden rounded-2xl h-[400px] shadow-lg bg-slate-200 cursor-pointer min-w-[85vw] sm:min-w-[350px] md:min-w-0 shrink-0 snap-center"
           >
             {/* Background Image */}
             <img

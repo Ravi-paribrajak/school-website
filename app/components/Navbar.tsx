@@ -13,10 +13,11 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+      if (isOpen) setIsOpen(false);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isOpen]);
 
   const navLinks = [
     { name: "Home", href: "#" },
@@ -97,6 +98,12 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", bounce: 0, duration: 0.4 }}
+              drag="x"
+              dragConstraints={{ left: 0 }}
+              dragElastic={{ left: 0, right: 0.5 }}
+              onDragEnd={(e, info) => {
+                if (info.offset.x > 100) setIsOpen(false);
+              }}
               className="fixed inset-y-0 right-0 w-[85%] max-w-sm bg-white shadow-2xl z-[999] flex flex-col md:hidden"
             >
               {/* Drawer Header */}

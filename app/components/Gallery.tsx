@@ -60,8 +60,8 @@ export default function Gallery() {
         </motion.p>
       </div>
 
-      {/* Masonry Layout */}
-      <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 px-4 md:px-8 max-w-7xl mx-auto">
+      {/* Gallery Layout */}
+      <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-x-auto snap-x snap-mandatory pb-8 scroll-smooth [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden px-4 md:px-8 max-w-7xl mx-auto">
         {galleryItems.map((item) => (
           <motion.div
             key={item.id}
@@ -69,12 +69,12 @@ export default function Gallery() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
-            className="relative group overflow-hidden rounded-2xl break-inside-avoid shadow-lg bg-white"
+            className="w-[85vw] sm:w-[350px] md:w-full shrink-0 snap-center relative group overflow-hidden rounded-2xl shadow-lg bg-white aspect-[4/3] md:h-[400px] md:aspect-auto"
           >
             <img
               src={item.url}
               alt={item.title}
-              className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-110"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               loading="lazy"
             />
             {/* Hover Overlay */}
