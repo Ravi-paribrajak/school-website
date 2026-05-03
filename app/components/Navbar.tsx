@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { FaYoutube } from "react-icons/fa";
@@ -32,8 +33,18 @@ export default function Navbar() {
           
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <Link href="#" className="font-serif text-2xl font-bold tracking-wide outline-none">
-              Institute OS
+            <Link href="#" className="flex items-center gap-3 group">
+              <div className="relative w-10 h-10 overflow-hidden rounded-full">
+                <Image 
+                  src="/icon.png" 
+                  alt="Institute Logo" 
+                  fill 
+                  className="object-cover"
+                />
+              </div>
+              <span className="font-serif text-2xl font-bold tracking-wide">
+                Institute OS
+              </span>
             </Link>
           </div>
 
@@ -108,7 +119,17 @@ export default function Navbar() {
             >
               {/* Drawer Header */}
               <div className="flex justify-between items-center p-6 border-b border-slate-100">
-                <span className="font-serif text-2xl font-bold text-slate-900">Institute OS</span>
+                <div className="flex items-center gap-3">
+                  <div className="relative w-8 h-8 overflow-hidden rounded-full">
+                    <Image 
+                      src="/icon.png" 
+                      alt="Institute Logo" 
+                      fill 
+                      className="object-cover"
+                    />
+                  </div>
+                  <span className="font-serif text-xl font-bold text-slate-900">Institute OS</span>
+                </div>
                 <button
                   onClick={() => setIsOpen(false)}
                   className="p-2 -mr-2 text-slate-900 hover:bg-slate-100 rounded-full transition-colors"

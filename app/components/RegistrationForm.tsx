@@ -17,7 +17,7 @@ const formSchema = z.object({
   email: z.string().email("Invalid email address"),
   phone: z.string().regex(/^\d{10}$/, "Phone number must be exactly 10 digits"),
   grade: z.enum(grades, {
-    errorMap: () => ({ message: "Please select your current grade" }),
+    message: "Please select your current grade",
   }),
   targetExams: z.array(z.string()).min(1, "Please select at least one target exam"),
 });
