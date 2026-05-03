@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail } from "lucide-react";
-import { FaWhatsapp, FaYoutube } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 
 export default function ContactSection() {
   return (
@@ -79,24 +79,7 @@ export default function ContactSection() {
               </div>
             </div>
 
-            {/* YouTube Block */}
-            <a 
-              href="https://youtube.com/@letslearnwithaloksir2528?si=D2DSm9E9CD8WIMPE" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="group flex items-start space-x-6 p-6 rounded-2xl bg-white border border-slate-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:border-red-500/30"
-            >
-              <div className="flex-shrink-0 p-4 rounded-full bg-red-100 text-red-600 transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(239,68,68,0.5)]">
-                <FaYoutube className="w-6 h-6" />
-              </div>
-              <div className="transform transition-transform duration-300 group-hover:translate-x-2">
-                <h3 className="text-xl font-bold text-slate-900 mb-2">Watch Our Lectures</h3>
-                <p className="text-slate-600 leading-relaxed">
-                  @letslearnwithaloksir2528<br />
-                  Subscribe for latest updates
-                </p>
-              </div>
-            </a>
+
             </motion.div>
 
           {/* Right Column: Dark Mode Map */}

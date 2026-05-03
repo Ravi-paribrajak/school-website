@@ -5,44 +5,42 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "sonner";
-import { Loader2, Sparkles, Target, GraduationCap, ChevronDown, X, CheckCircle2 } from "lucide-react";
+import { Loader2, Sparkles, Bus, GraduationCap, ChevronDown, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // 1. Zod Schema
-const grades = ["Class 10", "Class 11", "Class 12", "Dropper"] as const;
-const targetExamsOptions = ["JEE", "NEET", "Board Exams"] as const;
+const grades = [
+  "Pre-Primary (Nursery, LKG, UKG)",
+  "Primary (Class 1 to 5)",
+  "Middle School (Class 6 to 8)",
+  "Senior School (Class 9 to 12)"
+] as const;
 
 const formSchema = z.object({
-  fullName: z.string().min(2, "Full name must be at least 2 characters"),
+  fullName: z.string().min(2, "Parent's name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
   phone: z.string().regex(/^\d{10}$/, "Phone number must be exactly 10 digits"),
   grade: z.enum(grades, {
-    message: "Please select your current grade",
+    message: "Please select the class for admission",
   }),
-  targetExams: z.array(z.string()).min(1, "Please select at least one target exam"),
+  transport: z.enum(["Yes", "No"], {
+    message: "Please select whether transport is required",
+  }),
 });
 
 type FormValues = z.infer<typeof formSchema>;
 
 export default function RegistrationForm() {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
   const {
     register,
     handleSubmit,
     reset,
-    setValue,
-    watch,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      targetExams: [],
-    },
   });
-
-  const selectedExams = watch("targetExams");
 
   const onSubmit = async (data: FormValues) => {
     try {
@@ -55,7 +53,6 @@ export default function RegistrationForm() {
         body: JSON.stringify({
           access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
           ...data,
-          targetExams: data.targetExams.join(", "), // Flatten array for email readability
         }),
       });
 
@@ -63,7 +60,7 @@ export default function RegistrationForm() {
 
       if (result.success) {
         setIsSuccess(true);
-        toast.success("Consultation Booked!");
+        toast.success("Tour Booked!");
         reset();
       } else {
         toast.error("Submission failed. Please try again.");
@@ -73,20 +70,11 @@ export default function RegistrationForm() {
     }
   };
 
-  const toggleExam = (exam: string) => {
-    const current = [...selectedExams];
-    if (current.includes(exam)) {
-      setValue("targetExams", current.filter((e) => e !== exam), { shouldValidate: true });
-    } else {
-      setValue("targetExams", [...current, exam], { shouldValidate: true });
-    }
-  };
-
   return (
-    <section id="register" className="py-12 md:py-24 px-4 w-full bg-[#111] border-y border-white/5 relative overflow-hidden">
+    <section id="admissions" className="py-12 md:py-24 px-4 w-full bg-[#111] border-y border-white/5 relative overflow-hidden">
       {/* Background Accents */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] -z-10 translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px] -z-10 -translate-x-1/2 translate-y-1/2" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-600/10 rounded-full blur-[120px] -z-10 translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-yellow-600/10 rounded-full blur-[120px] -z-10 -translate-x-1/2 translate-y-1/2" />
 
       <div className="max-w-4xl mx-auto space-y-10 md:space-y-16">
         {/* Section Header */}
@@ -96,7 +84,7 @@ export default function RegistrationForm() {
               initial={{ opacity: 0, y: -10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-medium text-purple-400 mb-2 md:mb-4"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-medium text-amber-500 mb-2 md:mb-4"
             >
               <Sparkles className="w-4 h-4" />
               <span>Limited Slots for 2026-27</span>
@@ -107,7 +95,7 @@ export default function RegistrationForm() {
               viewport={{ once: true }}
               className="text-4xl md:text-6xl font-black tracking-tight text-white"
             >
-              Book a Free <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-300">Career Counseling</span> Session
+              Schedule a <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-yellow-600">Campus Tour</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -116,12 +104,12 @@ export default function RegistrationForm() {
               transition={{ delay: 0.1 }}
               className="text-lg text-slate-400 max-w-2xl mx-auto"
             >
-              Get a personalized roadmap from experts. Join 5000+ students who transformed their academic journey with our mentorship.
+              Take the first step towards your child’s brilliant future. Admissions open for Academic Year 2026-27.
             </motion.p>
           </div>
         )}
 
-        {/* SaaS-Style Form / Success UI */}
+        {/* Form / Success UI */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -142,17 +130,17 @@ export default function RegistrationForm() {
                 {/* Full Name */}
                 <div className="space-y-3">
                   <label htmlFor="fullName" className="text-sm font-bold text-slate-300 ml-1">
-                    Full Name
+                    Parent's Name
                   </label>
                     <input
                       id="fullName"
                       type="text"
-                      placeholder="Enter your full name"
+                      placeholder="Parent's Name"
                       {...register("fullName")}
                       className={`w-full px-5 py-4 rounded-xl md:rounded-2xl bg-slate-900/50 border text-white placeholder:text-slate-600 focus:outline-none transition-all shadow-inner ${
                         errors.fullName
                           ? "border-red-500 focus:ring-2 focus:ring-red-500/50"
-                          : "border-slate-800 focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500"
+                          : "border-slate-800 focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
                       }`}
                     />
                   {errors.fullName && <p className="text-red-400 text-xs mt-1 ml-1">{errors.fullName.message}</p>}
@@ -172,7 +160,7 @@ export default function RegistrationForm() {
                       className={`w-full px-5 py-4 rounded-xl md:rounded-2xl bg-slate-900/50 border text-white placeholder:text-slate-600 focus:outline-none transition-all shadow-inner ${
                         errors.email
                           ? "border-red-500 focus:ring-2 focus:ring-red-500/50"
-                          : "border-slate-800 focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500"
+                          : "border-slate-800 focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
                       }`}
                     />
                     {errors.email && <p className="text-red-400 text-xs mt-1 ml-1">{errors.email.message}</p>}
@@ -190,7 +178,7 @@ export default function RegistrationForm() {
                       className={`w-full px-5 py-4 rounded-xl md:rounded-2xl bg-slate-900/50 border text-white placeholder:text-slate-600 focus:outline-none transition-all shadow-inner ${
                         errors.phone
                           ? "border-red-500 focus:ring-2 focus:ring-red-500/50"
-                          : "border-slate-800 focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500"
+                          : "border-slate-800 focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
                       }`}
                     />
                     {errors.phone && <p className="text-red-400 text-xs mt-1 ml-1">{errors.phone.message}</p>}
@@ -200,8 +188,8 @@ export default function RegistrationForm() {
                 {/* Current Grade Dropdown */}
                 <div className="space-y-3">
                   <label htmlFor="grade" className="text-sm font-bold text-slate-300 ml-1 flex items-center gap-2">
-                    <GraduationCap className="w-4 h-4 text-purple-400" />
-                    Current Grade
+                    <GraduationCap className="w-4 h-4 text-amber-500" />
+                    Admission For (Class)
                   </label>
                   <div className="relative">
                     <select
@@ -211,10 +199,10 @@ export default function RegistrationForm() {
                       className={`w-full px-5 py-4 rounded-xl md:rounded-2xl bg-slate-900/50 border text-white focus:outline-none transition-all appearance-none shadow-inner cursor-pointer ${
                         errors.grade
                           ? "border-red-500 focus:ring-2 focus:ring-red-500/50"
-                          : "border-slate-800 focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500"
+                          : "border-slate-800 focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
                       }`}
                     >
-                      <option value="" disabled className="bg-slate-950">Select your class</option>
+                      <option value="" disabled className="bg-slate-950">Select the class</option>
                       {grades.map(grade => (
                         <option key={grade} value={grade} className="bg-slate-950">{grade}</option>
                       ))}
@@ -226,74 +214,38 @@ export default function RegistrationForm() {
                   {errors.grade && <p className="text-red-400 text-xs mt-1 ml-1">{errors.grade.message}</p>}
                 </div>
 
-                {/* Multi-Select Tag Input for Target Exams */}
+                {/* Transport */}
                 <div className="space-y-3 relative">
                   <label className="text-sm font-bold text-slate-300 ml-1 flex items-center gap-2">
-                    <Target className="w-4 h-4 text-indigo-400" />
-                    Target Exams
+                    <Bus className="w-4 h-4 text-amber-500" />
+                    Transport Facility Required?
                   </label>
-                  <div 
-                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                    className={`w-full min-h-[56px] px-4 py-2 rounded-xl md:rounded-2xl bg-slate-900/50 border transition-all cursor-pointer flex flex-wrap gap-2 items-center ${
-                      errors.targetExams 
-                        ? "border-red-500 ring-2 ring-red-500/50" 
-                        : isDropdownOpen 
-                          ? "border-purple-500 ring-2 ring-purple-500/50" 
-                          : "border-slate-800"
-                    }`}
-                  >
-                    {selectedExams.length === 0 && (
-                      <span className="text-slate-600 ml-1">Select one or more exams</span>
-                    )}
-                    {selectedExams.map(exam => (
-                      <span 
-                        key={exam} 
-                        className="flex items-center gap-1.5 px-3 py-1 bg-purple-600/20 border border-purple-500/30 text-purple-300 rounded-full text-xs font-bold"
-                      >
-                        {exam}
-                        <button 
-                          type="button" 
-                          onClick={(e) => { e.stopPropagation(); toggleExam(exam); }}
-                          className="hover:text-white transition-colors"
-                        >
-                          <X className="w-3 h-3" />
-                        </button>
-                      </span>
-                    ))}
-                    <div className="ml-auto text-slate-600">
-                      <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
+                  <div className="relative">
+                    <select
+                      defaultValue=""
+                      {...register("transport")}
+                      className={`w-full px-5 py-4 rounded-xl md:rounded-2xl bg-slate-900/50 border text-white focus:outline-none transition-all appearance-none shadow-inner cursor-pointer ${
+                        errors.transport
+                          ? "border-red-500 focus:ring-2 focus:ring-red-500/50"
+                          : "border-slate-800 focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+                      }`}
+                    >
+                      <option value="" disabled className="bg-slate-950">Select Yes or No</option>
+                      <option value="Yes" className="bg-slate-950">Yes</option>
+                      <option value="No" className="bg-slate-950">No</option>
+                    </select>
+                    <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-600">
+                      <ChevronDown className="w-4 h-4" />
                     </div>
                   </div>
-
-                  <AnimatePresence>
-                    {isDropdownOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        className="absolute z-20 top-full left-0 w-full mt-2 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden p-2"
-                      >
-                        {targetExamsOptions.map(exam => (
-                          <button
-                            key={exam}
-                            type="button"
-                            onClick={() => { toggleExam(exam); setIsDropdownOpen(false); }}
-                            className={`w-full text-left px-4 py-3 rounded-xl transition-colors text-sm font-bold ${selectedExams.includes(exam) ? 'bg-purple-600 text-white' : 'text-slate-400 hover:bg-slate-800'}`}
-                          >
-                            {exam}
-                          </button>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                  {errors.targetExams && <p className="text-red-400 text-xs mt-1 ml-1">{errors.targetExams.message}</p>}
+                  {errors.transport && <p className="text-red-400 text-xs mt-1 ml-1">{errors.transport.message}</p>}
                 </div>
 
                 {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full group relative flex items-center justify-center py-4 md:py-5 px-8 rounded-xl md:rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-black text-lg md:text-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(147,51,234,0.4)] focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900 disabled:opacity-70 disabled:cursor-not-allowed mt-4"
+                  className="w-full group relative flex items-center justify-center py-4 md:py-5 px-8 rounded-xl md:rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-600 text-slate-900 font-black text-lg md:text-xl transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(245,158,11,0.4)] focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-slate-900 disabled:opacity-70 disabled:cursor-not-allowed mt-4"
                 >
                   {isSubmitting ? (
                     <>
@@ -302,8 +254,8 @@ export default function RegistrationForm() {
                     </>
                   ) : (
                     <span className="flex items-center gap-2">
-                      Confirm Consultation
-                      <Sparkles className="w-5 h-5" />
+                      Book Campus Visit
+                      <Sparkles className="w-5 h-5 text-slate-900" />
                     </span>
                   )}
                 </button>
@@ -320,11 +272,11 @@ export default function RegistrationForm() {
                 </div>
                 <h3 className="text-3xl font-black text-white">Application Received!</h3>
                 <p className="text-slate-400 text-lg max-w-sm leading-relaxed">
-                  Thank you for your interest. Our senior counselors will analyze your profile and contact you within <span className="text-white font-bold">24 hours</span> to schedule your free session.
+                  Thank you for your interest. Our admissions team will contact you within <span className="text-white font-bold">24 hours</span> to schedule your campus visit.
                 </p>
                 <button
                   onClick={() => setIsSuccess(false)}
-                  className="text-purple-400 font-bold hover:text-purple-300 transition-colors text-sm uppercase tracking-widest pt-4"
+                  className="text-amber-500 font-bold hover:text-amber-400 transition-colors text-sm uppercase tracking-widest pt-4"
                 >
                   Back to Website
                 </button>

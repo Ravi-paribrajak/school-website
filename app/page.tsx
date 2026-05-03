@@ -1,4 +1,5 @@
 import Hero from "./components/Hero";
+import NoticeBoard from "./components/NoticeBoard";
 import StatsBanner from "./components/StatsBanner";
 import TabbedShowcase from "./components/TabbedShowcase";
 import Programs from "./components/Programs";
@@ -11,6 +12,7 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       <Hero />
+      <NoticeBoard />
       <StatsBanner />
       <TabbedShowcase />
       <Programs />

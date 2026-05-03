@@ -8,10 +8,10 @@ import {
 } from "framer-motion";
 
 const stats = [
-  { num: 15, suffix: "+ Years", label: "Academic Excellence" },
-  { num: 50, suffix: "+", label: "Expert Faculty" },
-  { num: 100, suffix: "%", label: "Placement Assistance" },
-  { num: 24, suffix: "/7", label: "Campus Support" },
+  { num: 15, suffix: ":1", label: "Student-Teacher Ratio" },
+  { num: 5, suffix: "-Acre", label: "Lush Green Campus" },
+  { num: 100, suffix: "%", label: "Board Exam Pass Rate" },
+  { num: 20, suffix: "+", label: "Co-Curricular Activities" },
 ];
 
 function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
@@ -36,7 +36,7 @@ function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
   return (
     <span
       ref={ref}
-      className="text-4xl md:text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-300 drop-shadow-sm"
+      className="text-4xl md:text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-amber-400 to-amber-600 drop-shadow-sm"
     >
       0{suffix}
     </span>
@@ -45,10 +45,10 @@ function AnimatedCounter({ value, suffix }: { value: number; suffix: string }) {
 
 export default function StatsBanner() {
   return (
-    <section className="relative bg-gradient-to-b from-slate-950 to-slate-900 py-20 border-y border-white/5 overflow-hidden">
+    <section id="about" className="relative bg-gradient-to-b from-slate-950 to-slate-900 py-20 border-y border-white/5 overflow-hidden">
       {/* Background glow effects */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-yellow-500/10 rounded-full blur-[120px] pointer-events-none" />
       
       <div className="relative max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
@@ -66,7 +66,7 @@ export default function StatsBanner() {
                 {stat.label}
               </p>
               {/* Subtle underline accent */}
-              <div className="mt-4 w-8 h-1 bg-gradient-to-r from-blue-500 to-transparent rounded-full opacity-20 group-hover:opacity-50 transition-opacity" />
+              <div className="mt-4 w-8 h-1 bg-gradient-to-r from-amber-500 to-transparent rounded-full opacity-20 group-hover:opacity-50 transition-opacity" />
             </motion.div>
           ))}
         </div>

@@ -21,9 +21,11 @@ export default function Navbar() {
   }, [isOpen]);
 
   const navLinks = [
-    { name: "Home", href: "#" },
-    { name: "Campus", href: "#gallery" },
-    { name: "Faculty", href: "#faculty" },
+    { name: "Home", href: "#home" },
+    { name: "About Us", href: "#about" },
+    { name: "Academics", href: "#academics" },
+    { name: "Campus Life", href: "#campus-life" },
+    { name: "Admissions", href: "#admissions" },
   ];
 
   return (
@@ -43,7 +45,7 @@ export default function Navbar() {
                 />
               </div>
               <span className="font-serif text-2xl font-bold tracking-wide">
-                Institute OS
+                Academy OS
               </span>
             </Link>
           </div>
@@ -54,15 +56,15 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`group relative transition-colors text-base font-medium tracking-wide outline-none ${scrolled ? 'text-slate-600 hover:text-slate-900' : 'text-white/80 hover:text-white'}`}
+                className={`group relative transition-colors text-base font-medium tracking-wide outline-none ${scrolled ? 'text-slate-600 hover:text-amber-500' : 'text-white/80 hover:text-amber-500'}`}
               >
                 {link.name}
                 {/* Hover Underline */}
-                <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-blue-500 origin-center scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
+                <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-amber-500 origin-center scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
               </Link>
             ))}
             <a 
-              href="https://youtube.com/@letslearnwithaloksir2528?si=D2DSm9E9CD8WIMPE" 
+              href="https://www.youtube.com/@Ravi_Paribrajak" 
               target="_blank" 
               rel="noopener noreferrer" 
               className={`transition-colors outline-none ${scrolled ? 'text-slate-600 hover:text-red-500' : 'text-slate-300 hover:text-red-500'}`}
@@ -70,10 +72,10 @@ export default function Navbar() {
               <FaYoutube className="w-6 h-6"/>
             </a>
             <Link
-              href="#register"
-              className={`inline-flex h-10 items-center justify-center rounded-full px-6 text-sm font-medium transition-all hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 ${scrolled ? 'bg-slate-900 text-white hover:bg-slate-800 focus:ring-slate-900' : 'bg-white text-slate-900 hover:bg-slate-100 focus:ring-white focus:ring-offset-slate-900'}`}
+              href="#admissions"
+              className="inline-flex h-10 items-center justify-center rounded-full px-6 text-sm font-semibold transition-all hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 bg-gradient-to-r from-amber-500 to-yellow-600 text-slate-900"
             >
-              Apply Now
+              Book a Tour
             </Link>
           </div>
 
@@ -128,7 +130,7 @@ export default function Navbar() {
                       className="object-cover"
                     />
                   </div>
-                  <span className="font-serif text-xl font-bold text-slate-900">Institute OS</span>
+                  <span className="font-serif text-xl font-bold text-slate-900">Academy OS</span>
                 </div>
                 <button
                   onClick={() => setIsOpen(false)}
@@ -145,7 +147,7 @@ export default function Navbar() {
                     key={link.name}
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="text-lg font-medium text-slate-700 hover:text-blue-600 transition-colors"
+                    className="text-lg font-medium text-slate-700 hover:text-amber-500 transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -154,23 +156,13 @@ export default function Navbar() {
 
               {/* Drawer Footer (Bottom) */}
               <div className="mt-auto p-6 border-t border-slate-100 flex flex-col space-y-4 bg-slate-50 pb-8">
-                <a 
-                  href="https://youtube.com/@letslearnwithaloksir2528?si=D2DSm9E9CD8WIMPE" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="flex items-center gap-4 text-lg font-semibold text-slate-900 hover:text-red-600 transition-colors group"
-                >
-                  <div className="p-3 rounded-xl bg-red-100 group-hover:bg-red-200 transition-colors">
-                    <FaYoutube className="w-6 h-6 text-red-600"/>
-                  </div>
-                  <span>Watch Lectures</span>
-                </a>
+
                 <Link
-                  href="#register"
+                  href="#admissions"
                   onClick={() => setIsOpen(false)}
-                  className="inline-flex w-full h-14 items-center justify-center rounded-2xl bg-slate-900 text-white text-lg font-bold hover:bg-slate-800 transition-all active:scale-[0.98] shadow-xl shadow-slate-200"
+                  className="inline-flex w-full h-14 items-center justify-center rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-600 text-slate-900 text-lg font-bold hover:scale-[1.02] transition-transform active:scale-[0.98] shadow-xl shadow-amber-500/20"
                 >
-                  Apply Now
+                  Book a Tour
                 </Link>
               </div>
             </motion.div>

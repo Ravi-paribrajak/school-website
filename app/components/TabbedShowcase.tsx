@@ -22,7 +22,7 @@ export default function TabbedShowcase() {
   const [activeTab, setActiveTab] = useState("achievers");
 
   return (
-    <section className="py-24 bg-white overflow-hidden h-auto min-h-fit transition-all duration-300 ease-in-out">
+    <section id="campus-life" className="py-24 bg-white overflow-hidden h-auto min-h-fit transition-all duration-300 ease-in-out">
       <div className="max-w-7xl mx-auto px-4">
         {/* Toggle Menu */}
         <div className="flex justify-center mb-16">
