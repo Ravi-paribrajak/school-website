@@ -5,10 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Award, Camera, Star } from "lucide-react";
 
 const achievers = [
-  { id: 1, name: "Amit Kumar", result: "Rank 152", exam: "JEE Advanced 2024", image: "https://randomuser.me/api/portraits/men/32.jpg" },
-  { id: 2, name: "Sneha Jha", result: "98.4%", exam: "CBSE Boards 2024", image: "https://randomuser.me/api/portraits/women/45.jpg" },
-  { id: 3, name: "Rahul Singh", result: "685/720", exam: "NEET 2024", image: "https://randomuser.me/api/portraits/men/22.jpg" },
-  { id: 4, name: "Priya Sharma", result: "Rank 450", exam: "JEE Main 2024", image: "https://randomuser.me/api/portraits/women/33.jpg" },
+  { id: 1, name: "Amit Kumar", result: "Rank 152", exam: "CBSE Boards 2025", image: "https://randomuser.me/api/portraits/men/32.jpg" },
+  { id: 2, name: "Sneha Jha", result: "98.4%", exam: "CBSE Boards 2025", image: "https://randomuser.me/api/portraits/women/45.jpg" },
+  { id: 3, name: "Rahul Singh", result: "685/720", exam: "CBSE Boards 2025", image: "https://randomuser.me/api/portraits/men/22.jpg" },
+  { id: 4, name: "Priya Sharma", result: "Rank 450", exam: "CBSE Boards 2025", image: "https://randomuser.me/api/portraits/women/33.jpg" },
 ];
 
 const campusPhotos = [
@@ -67,30 +67,45 @@ export default function TabbedShowcase() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4 }}
-                className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-x-auto snap-x snap-mandatory py-8 -my-8 px-4 -mx-4 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:overflow-visible md:snap-none md:p-0 md:m-0"
+                className="relative flex overflow-hidden py-8 group"
               >
-                {achievers.map((student) => (
-                  <div
-                    key={student.id}
-                    className="group bg-slate-50 rounded-2xl p-6 border border-slate-200 transition-all hover:shadow-xl hover:border-blue-500/30 min-w-[85vw] sm:min-w-[60vw] shrink-0 snap-center md:min-w-0 md:shrink"
-                  >
-                    <div className="relative w-24 h-24 mx-auto mb-6">
-                      <img
-                        src={student.image}
-                        alt={student.name}
-                        className="w-full h-full rounded-full object-cover border-4 border-white shadow-md transition-transform group-hover:scale-105"
-                      />
-                      <div className="absolute -bottom-1 -right-1 bg-blue-600 text-white p-1.5 rounded-full shadow-lg">
-                        <Star className="w-3 h-3 fill-current" />
+                {/* Gradient Fades for Depth */}
+                <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+                <div className="absolute inset-y-0 right-0 w-16 md:w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+
+                <motion.div 
+                  className="flex w-max items-center"
+                  animate={{ x: ["0%", "-50%"] }}
+                  transition={{
+                    ease: "linear",
+                    duration: 30,
+                    repeat: Infinity,
+                  }}
+                  whileHover={{ animationPlayState: "paused" }}
+                >
+                  {[...achievers, ...achievers].map((student, index) => (
+                    <div
+                      key={index}
+                      className="mx-3 bg-slate-50 rounded-2xl p-6 border border-slate-200 transition-all hover:shadow-xl hover:border-blue-500/30 w-[280px] sm:w-[320px] shrink-0"
+                    >
+                      <div className="relative w-24 h-24 mx-auto mb-6">
+                        <img
+                          src={student.image}
+                          alt={student.name}
+                          className="w-full h-full rounded-full object-cover border-4 border-white shadow-md transition-transform hover:scale-105"
+                        />
+                        <div className="absolute -bottom-1 -right-1 bg-blue-600 text-white p-1.5 rounded-full shadow-lg">
+                          <Star className="w-3 h-3 fill-current" />
+                        </div>
+                      </div>
+                      <div className="text-center">
+                        <h3 className="text-xl font-bold text-slate-900 mb-1">{student.name}</h3>
+                        <p className="text-blue-600 font-black text-2xl mb-1">{student.result}</p>
+                        <p className="text-slate-500 text-sm font-medium">{student.exam}</p>
                       </div>
                     </div>
-                    <div className="text-center">
-                      <h3 className="text-xl font-bold text-slate-900 mb-1">{student.name}</h3>
-                      <p className="text-blue-600 font-black text-2xl mb-1">{student.result}</p>
-                      <p className="text-slate-500 text-sm font-medium">{student.exam}</p>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </motion.div>
               </motion.div>
             ) : (
               <div className="relative group/carousel">
