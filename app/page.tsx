@@ -1,6 +1,7 @@
 import Hero from "./components/Hero";
 import StatsBanner from "./components/StatsBanner";
-import Gallery from "./components/Gallery";
+import TabbedShowcase from "./components/TabbedShowcase";
+import Programs from "./components/Programs";
 import Faculty from "./components/Faculty";
 import Testimonials from "./components/Testimonials";
 import RegistrationForm from "./components/RegistrationForm";
@@ -11,7 +12,8 @@ export default function Home() {
     <main className="min-h-screen">
       <Hero />
       <StatsBanner />
-      <Gallery />
+      <TabbedShowcase />
+      <Programs />
       <Faculty />
       <Testimonials />
       <RegistrationForm />

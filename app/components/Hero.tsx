@@ -36,7 +36,7 @@ export default function Hero() {
 
   return (
     <section 
-      className="relative w-full min-h-screen pt-32 flex items-center overflow-hidden bg-cover bg-center"
+      className="relative w-full min-h-screen -mt-[72px] pt-[72px] flex items-center overflow-hidden bg-cover bg-center"
       style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=2086")' }}
     >
       {/* Authoritative Overlay */}

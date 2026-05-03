@@ -92,3 +92,41 @@
 - Locked mobile gallery items to a strict `aspect-[4/3]` to prevent jagged scrolling.
 - Applied `absolute inset-0` and `object-cover` to images for perfect container filling.
 - Optimized card width units (`w-[85vw]`) to ensure consistent horizontal snapping.
+
+### [2026-05-01] - Announcement Banner Implementation
+- Created `AnnouncementBanner.tsx` with a vibrant neon gradient and dismissible state.
+- Integrated the banner into `RootLayout` at the absolute top of the page.
+- Updated `Navbar.tsx` to `sticky` and adjusted `Hero.tsx` layout to support the new flow.
+
+### [2026-05-01] - Tabbed Showcase Implementation
+- Created `TabbedShowcase.tsx` with animated pill-toggle and dual-view functionality.
+- Implemented "Our Achievers" view with high-fidelity student rank cards.
+- Implemented "Campus Tour" view with a premium image gallery and hover effects.
+- Replaced standalone Gallery with this interactive section for better information density.
+- Refactored for dynamic height and smooth `transition-all` between tab views.
+- Optimized "Campus Tour" for mobile with horizontal snap-scroll carousel and hint shadows.
+- Refactored "Our Achievers" into a horizontal snap-scroll carousel on mobile with peek behavior.
+
+### [2026-05-01] - SaaS-Style Form Redesign
+- Redesigned registration form as a high-end career counseling onboarding step.
+- Implemented a dark-mode aesthetic with neon focus glows and background accents.
+- Added structured dropdowns for 'Current Grade' and custom radio buttons for 'Target Exam'.
+- Updated validation schema (Zod) and added premium gradient submission states.
+
+### [2026-05-01] - Form Theme & Mobile Optimization
+- Harmonized theme with a deep `#111` background and neon purple-to-indigo accents.
+- Reduced mobile vertical padding by 50% for better spatial efficiency.
+- Replaced Target Exam radio buttons with a custom Multi-Select Tag Input.
+- Implemented dismissible pills and animated dropdown for space-saving exam selection.
+
+### [2026-05-01] - Web3Forms Integration
+- Switched counseling form to live lead capture using Web3Forms API.
+- Implemented asynchronous `fetch` submission with dynamic button states ("Sending...").
+- Designed a premium Success State UI with animated checkmark and profile confirmation.
+- Integrated `NEXT_PUBLIC_WEB3FORMS_KEY` for secure access key management.
+
+### [2026-05-01] - Programs & Batches Implementation
+- Created `Programs.tsx` with a responsive pricing-style grid layout.
+- Designed premium dark-themed cards with lift-on-hover effects.
+- Implemented a "Most Popular" flagship card with neon purple glow and gradient badge.
+- Added feature lists with custom neon green checkmarks and direct anchor-link CTAs.
